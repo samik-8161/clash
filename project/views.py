@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib.auth import login, logout
+from django.contrib.auth import login
+from django.contrib.auth import logout
 
 from .models import Questions, Profile, Response
 
@@ -19,7 +20,7 @@ def index1(request):
         if request.POST['pass'] == request.POST['passwordagain']:
             try:
                 user = User.objects.get(username=request.POST['uname'])
-                return render(request, 'signup.html', {'error': "Username Has Already Been Taken"})
+                return render(request, 'signup.html', {'error': "Try Other. Username Has Already Been Taken"})
             except User.DoesNotExist:
                 user = User.objects.create_user(username=request.POST['uname'], password=request.POST['pass'])
                 p1_name = request.POST['p1_name']
@@ -38,7 +39,7 @@ def index1(request):
                 userprofile.save()
                 return redirect(reverse('index2'))
             else:
-                return render(request, 'signup.html', {'error': "Email not valid"})
+                return render(request, 'signup.html', {'error': "Your email id not valid"})
         else:
             return render(request, 'signup.html', {'error': "Passwords Don't Match"})
     else:
