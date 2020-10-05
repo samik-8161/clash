@@ -22,8 +22,8 @@ class Profile(models.Model):
     SE = 'SE'
 
     CHOICES = [
-        (FE, 'Freshman'),
-        (SE, 'Senior'),
+        (FE, 'First Year(Freshman)'),
+        (SE, 'Second Year(Senior)'),
 
     ]
     year = models.CharField(
